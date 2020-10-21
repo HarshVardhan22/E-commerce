@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");//to store all the user credentials in cookies
 //to load all the cofiguration in .env file
 require("dotenv").config();
 
@@ -23,6 +25,13 @@ mongoose
 // app.get("/", (req,res)=>{
 //     res.send("Hello from node !");
 // })
+
+
+//middleWares
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(cookieParser());
+
 
 //using the imported routes
 app.use('/api', userRoutes) // "/api" is used just as a convention as multiple routes will be ther in user.js

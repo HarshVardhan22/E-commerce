@@ -9,8 +9,8 @@ const router = express.Router();
 // });
 
 //Instead of using the above hardcoded route to a certain section the data req or res is taken from controller 
-const {sayHi} = require("../controllers/user")
+const {signup} = require("../controllers/user")
 
-router.get("/",sayHi);
+router.get("/signup",signup);
 
 module.exports = router;
