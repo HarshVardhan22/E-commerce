@@ -1,6 +1,6 @@
 const mongoose  = require("mongoose");
 const crypto = require("crypto");//used for managing password field
-const uuidv1 = require('uuid/v1');//used for generating unique ids
+const { v1: uuidv1 } = require("uuid");//used for generating unique ids
 const { stringify } = require("querystring");
 const { use } = require("../routes/user");
 
@@ -43,18 +43,18 @@ const userSchema = new mongoose.Schema({
 
 
 
-},{timestamps})
+},{timestamps:true})
 
 //virtual field
 
 userSchema.virtual("password")
           .set(function(password){
-              this.password = password;
+              this._password = password;
               this.salt = uuidv1();
               this.hashed_password = this.encryptPassword(password);
           })
           .get(function(){
-              return this.password;
+              return this._password;
           });
 
 //defining the above used function encryptPassword in set
