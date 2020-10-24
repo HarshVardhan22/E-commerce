@@ -2,13 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const expressValidator = require("express-validator");// to use validation of terms like name email id or password by using predefined functions in the package
 const cookieParser = require("cookie-parser");//to store all the user credentials in cookies
 //to load all the cofiguration in .env file
 require("dotenv").config();
 
 //importing router from user.js
 const userRoutes = require("./routes/user")
-
 const dotenv = require('dotenv');
 const app =express();
 
@@ -31,7 +31,7 @@ mongoose
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
+app.use(expressValidator()); 
 
 //using the imported routes
 app.use('/api', userRoutes) // "/api" is used just as a convention as multiple routes will be ther in user.js
