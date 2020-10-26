@@ -36,8 +36,8 @@ exports.signin = (req, res) => {
     }
      
     //if the user is found the match it with the existing email and password db
-      //our password in the db is stored in hashed format and the password we will be getting from body will be in normal format.
-      //therefore we must hash the password before matching and this will be done by using the same method that was used in ../models/users
+    //our password in the db is stored in hashed format and the password we will be getting from body will be in normal format.
+    //therefore we must hash the password before matching and this will be done by using the same method that was used in ../models/users
     
       if(!user.authenticate(password)){
           return res.status(400).json({
@@ -59,3 +59,11 @@ exports.signout = (req, res) => {
     res.clearCookie("t");
     res.json({ message: "Sign Out Successful"})
 }  
+
+//this method below will help to allow access to any particular page to only signed in users.
+//It checks by using the atribute "secret".
+exports.requireSignin = expressJwt({
+  secret: process.env.JWT_SECRET,
+  algorithms: ["HS256"], // added later
+  userProperty: "auth",
+});
