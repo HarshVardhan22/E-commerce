@@ -2,7 +2,7 @@ const mongoose  = require("mongoose");
 const crypto = require("crypto");//used for managing password field
 const { v1: uuidv1 } = require("uuid");//used for generating unique ids
 const { stringify } = require("querystring");
-const { use } = require("../routes/user");
+const { use } = require("../routes/auth");
 
 const userSchema = new mongoose.Schema({
     name:{
