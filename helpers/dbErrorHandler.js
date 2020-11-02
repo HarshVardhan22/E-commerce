@@ -1,9 +1,6 @@
 "use strict";
 //this is to test git clone
-console.log("hello git!");
-/**
- * Get unique error field name
- */
+
 const uniqueMessage = (error) => {
   let output;
   try {
