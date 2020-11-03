@@ -10,6 +10,7 @@ require("dotenv").config();
 //importing router from user.js
 const authRoutes = require("./routes/auth")
 const userRoutes = require("./routes/user")
+const categoryRoutes = require("./routes/category")
 const dotenv = require('dotenv');
 const app =express();
 
@@ -37,7 +38,7 @@ app.use(expressValidator());
 //using the imported routes
 app.use('/api', authRoutes)
 app.use('/api', userRoutes) // "/api" is used just as a convention as multiple routes will be ther in user.js
-
+app.use('/api', categoryRoutes)
 
 // selecting the port defined in the .env file
 const port = process.env.PORT||8000;
