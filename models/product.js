@@ -17,25 +17,26 @@ const productSchema = new mongoose.Schema({
     price:{
         type : Number,
         required : true,
-        maxlength : 32,
+        maxlength : 12,
         trim : true // trim is used to delete the spaces before the input
     },
     category:{
         type : ObjectId,
         ref : 'Category',
-        required : true
-        
+        required : true,
+        maxlength : 32
         // trim is used to delete the spaces before the input
     },
     quantity:{
-        type : Number,
+        type : Number
     },
     photo:{
         data : Buffer,
-        contentType : String
+        contentType : String,
+        required : false
     },
     shipping: {
-
+        required : false,
         type : Boolean
         //may add this feature
         // to check whether shipping is available in that location or not .Or to give the option to the user to download an e-book.
