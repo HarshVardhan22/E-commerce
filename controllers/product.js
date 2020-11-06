@@ -26,7 +26,6 @@ exports.create = (req,res) => {
         let product = new Product(fields)
 
        
-
         if(files.photo) {
             if(files.photo.size > 10000000){
                 return res.status(400).json({
@@ -40,7 +39,7 @@ exports.create = (req,res) => {
         product.save((err,result) => {
             if(err){
                 return res.status(400).json({
-                    error: err
+                    error: errorHandler(err)
                 });
             };
             res.json({ result })
@@ -48,3 +47,22 @@ exports.create = (req,res) => {
 
     })
 };
+//************end of CREATE function*********** */
+
+exports.productById = (req,res,next,id) =>{
+    Product.findById(id).exec((err,product)=>{
+        if(err||!product){
+            return res.status(400).json({
+                error: "Product not found"
+            });
+        }
+        req.product = product;
+        next();
+    })
+}
+
+exports.read =(req,res) =>{
+    req.product.photo = undefined; //we are doing this to improve performance and we will device a new route for imgs in order to maintain highspeed performance
+    return res.json(req.product);
+
+}
