@@ -15,3 +15,19 @@ exports.create = (req,res) => {
     })
 
 }
+
+exports.categoryById = (req,res,next,id) =>{
+    Category.findById(id).exec((err,category)=>{
+        if(err||!category){
+            return res.status(400).json({
+                error: "Category not found, check categoryID",
+            })
+        }
+        req.category = category;
+        next();
+    })
+}
+
+exports.read = (req,res)=>{
+    return res.json(req.category);
+};
