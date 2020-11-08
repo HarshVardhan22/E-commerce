@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const expressValidator = require("express-validator");// to use validation of terms like name email id or password by using predefined functions in the package
 const cookieParser = require("cookie-parser");//to store all the user credentials in cookies
+const cors = require("cors");// to manage req from different routes and not a fixed route like port 8000
 //to load all the cofiguration in .env file
 require("dotenv").config();
 
@@ -35,6 +36,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator()); 
+app.use(cors()); 
 
 //using the imported routes
 app.use('/api', authRoutes)
