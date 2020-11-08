@@ -127,3 +127,30 @@ exports.update = (req,res) => {
 
     })
 };
+
+/**summon products on the basis of sell/arrival */
+//sell = /products?sortBy=sold&order=desc&limit=4
+//the above will show maximum sold products in descending order with a limit of 4per page
+//arrival = /products?sortBy=createdAt&order=desc&limit=4
+//the above will show newly added products in descending order with a limit of 4per page
+
+//however no params are send then all products will be shown
+
+exports.list=(req,res) =>{
+    let order = req.query.order?req.query.order:'asc';
+    let sortBy = req.query.sortBy?req.query.sortBy:'_id';
+    let limit = req.query.limit?parseInt(req.query.limit):7;
+
+    Product.find().select("-photo")
+                  .populate('category')
+                  .sort([[sortBy,order]])
+                  .limit(limit)
+                  .exec((err,products)=>{
+                      if(err){
+                          return res.status(400).json({
+                              error:'Products not found'
+                          })
+                      }
+                      res.send(products)
+                  })
+}
