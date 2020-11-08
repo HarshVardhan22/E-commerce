@@ -162,7 +162,7 @@ exports.list=(req,res) =>{
 exports.listRelated =(req,res) =>{
     let limit = req.query.limit?parseInt(req.query.limit):6;
 
-    Product.find({_id:{$ne: req.product},category: req.product.category})
+    Product.find({_id:{$ne: req.product},category: req.product.category}) // ne = not included and we have used this bcz this a middleware to send the products related to product searched, therfore to prevent it from being sent twice we have used ne:productId of the product that is actually being searched
            .limit(limit)
            .populate('category','_id name')
            .exec((err,products)=>{
@@ -212,9 +212,12 @@ exports.listBySearch = (req, res) => {
     for (let key in req.body.filters) {
         if (req.body.filters[key].length > 0) {
             if (key === "price") {
+                //gte and lte are functions of mongodb
                 // gte -  greater than price [0-10]
                 // lte - less than
                 findArgs[key] = {
+                    //the price that will be netered by the user in the front end is supposed to be an array of 2 numbers, symbolizing the price limit
+                    //[0] means the starting limit of the price trag where as [1] means the ending limit.
                     $gte: req.body.filters[key][0],
                     $lte: req.body.filters[key][1]
                 };
@@ -242,3 +245,12 @@ exports.listBySearch = (req, res) => {
             });
         });
 };
+
+
+exports.photo = (req,res,next)=>{
+    if(req.product.photo.data){
+        res.set("Content-Type", req.product.photo.contentType) //set() is used to change the content type i.e from BINARY in this case to .jpeg or .png or etc
+        return res.send(req.product.photo.data)
+    }
+    next();
+}
