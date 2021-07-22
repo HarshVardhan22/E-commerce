@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken"); //to generate token
 const expressJwt = require("express-jwt"); //for authorization check
 
 exports.signup = (req, res) => {
+  
   //we are able to get req.body we installed the body-parse package
 
   console.log("req.body", req.body);

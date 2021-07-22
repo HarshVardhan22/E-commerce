@@ -14,7 +14,7 @@ const router = express.Router();
 
 //Instead of using the above hardcoded route to a certain section the data req or res is taken from controller
 
-//// meaning of const {xxx} you can rewrite this**********************
+// **meaning of const {xxx} you can rewrite this
 
 // const name = app.name;
 // const version = app.version;
