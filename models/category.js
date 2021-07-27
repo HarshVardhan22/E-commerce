@@ -6,7 +6,8 @@ const categorySchema = new mongoose.Schema(
             type : String,
             required : true,
             maxlength : 32,
-            trim : true // trim is used to delete the spaces before the input
+            trim : true, // trim is used to delete the spaces before the input
+            unique:true
         }
     },
     {timestamps:true}
