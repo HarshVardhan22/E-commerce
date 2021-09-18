@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.leftContainer {
+  height: 100vh;
+  animation-name: sliderLeft;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  padding: 25px;
+  border-radius: 5px;
+  background: #e0e0e0;
+  box-shadow: 7px 7px 14px #acacac, -7px -7px 14px #ffffff;
+}
+
+.leftContainer input {
+  border: 1px solid black;
+ 
+}
+
+.rightContainer {
+  height: 100vh;
+  animation-name: sliderRight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes sliderRight {
+  from {
+    width: 100vw;
+  }
+  to {
+    width: 70vw;
+  }
+}
+@keyframes sliderLeft {
+  from {
+    width: 0vw;
+  }
+  to {
+    width: 30vw;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .leftContainer {
+    width: 80vw;
+    animation: none;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+  .rightContainer {
+    visibility: hidden;
+    animation-name: vanish;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes vanish {
+    from {
+      height: 100vh;
+    }
+    to {
+      height: 0vh;
+      display: none;
+    }
+  }
+}

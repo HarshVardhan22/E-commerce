@@ -1,0 +1,28 @@
+ button:hover{
+    background-color: whitesmoke;
+    color: #1f1f1f;
+    border: 1px solid red;
+    transition: all 0.2s linear;
+  }
+   button {
+    height: 50px;
+    background-color: #1f1f1f;
+    color: aliceblue;
+    padding: 10px;
+    font-size: medium;
+    border-radius: 3px;
+    border:none;
+    margin: 10px;
+  }
+
+  .imgContainer{
+    max-width: 18vw ;
+  }
+  .cardImage{
+    height: 30vh;
+    width:100%;
+    object-fit: cover;
+    border-radius: 2%;
+}
+
+
